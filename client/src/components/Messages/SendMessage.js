@@ -23,13 +23,16 @@ const SendMessage = ({room}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(messageData)
         })
-        console.log(messageData);
+        setmessageInput('');
+        setmessageName('');
     }
 
     return (
         <div className="input_wrapper">
-            <input type="text" onChange={(event) => setmessageName(event.target.value)} placeholder="Name" />
-            <input type="text" onChange={(event) => setmessageInput(event.target.value)} placeholder="Message" />
+            <div>
+                <input value={messageName} type="text" onChange={(event) => setmessageName(event.target.value)} placeholder="Name" />
+                <input value={messageInput} type="text" onChange={(event) => setmessageInput(event.target.value)} placeholder="Message" />
+            </div>
             <button onClick={clickHandler}>Send</button>
         </div>
     )

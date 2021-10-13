@@ -1,6 +1,8 @@
+*{
+    box-sizing: border-box;
+}
 html, body, #root{
     height: 100%;
-    box-sizing: border-box;
     margin: 0;
     font-family: 'Calibri', sans-serif;
 }
@@ -52,4 +54,51 @@ html, body, #root{
 
 .chat-body > div:nth-child(1) {
     background-color: #ddd;
+}
+
+
+.msg_window {
+    height: 80%;
+}
+
+.message.outgoing {
+    text-align: right;
+}
+
+.input_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    height: 20%;
+    background: #f5f5f5;
+    box-shadow: 0px -10px 10px rgb(0 0 0 / 8%);
+}
+
+.input_wrapper > div {
+    flex: 0 0 80%;
+}
+.input_wrapper input {
+    display: block;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    background-color: #ffd400;
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.message.outgoing > div:nth-child(1) {
+    background: #216ad9;
+    color: #fff;
 }
