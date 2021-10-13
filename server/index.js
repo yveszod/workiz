@@ -1,50 +1,35 @@
 const express = require('express')
 const app = express()
+const fs = require('fs')
+
 
 let allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Headers', "*");
     next();
   }
-app.use(allowCrossDomain);
+app.use(allowCrossDomain)
 
-const randomMessages = [
-    {
-        roomId: 10,
-        fromName: "Sender",
-        fromNumber: "0546676616",
-        body: [
-            {
-                recievedAt: new Date().toGMTString(),
-                body: "lorem ipsum 111",
-                direction: "incoming"
-            },{
-                recievedAt: new Date().toGMTString(),
-                body: "lorem ipsum 222",
-                direction: "outgoing"
-            }
-        ]
-    },
-    {
-        roomId: 11,
-        fromName: "Sender",
-        fromNumber: "0546676616",
-        body: [
-            {
-                recievedAt: new Date().toGMTString(),
-                body: "lorem ipsum",
-                direction: "incoming"
-            },{
-                recievedAt: new Date().toGMTString(),
-                body: "lorem ipsum",
-                direction: "outgoing"
-            }
-        ]
-    }
-]
+app.use(
+    express.urlencoded({
+      extended: true
+    })
+)
+
+app.use(express.json())
+
+
+let rawdata = fs.readFileSync('messages.json'); 
+
+const randomMessages = JSON.parse(rawdata);
 
 app.post('/api/ping_message', (req, res) => {
-  res.send('hello world');
+  randomMessages.push(req.body);
+  fs.writeFile('messages.json', JSON.stringify(randomMessages), 'utf8', ()=> {
+      console.log('Added')
+  });
+  res.end();
+
 })
 
 
